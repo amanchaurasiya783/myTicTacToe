@@ -34,17 +34,6 @@ Array.from(boxes).forEach(box =>{
     })
 })
 
-//function to change the Turn
-function changeTurn(){
-    if(turn == "X" && playerTurn == player1){
-        turn = "O";
-        playerTurn = player2;
-    }else{
-        turn = "X";
-        playerTurn = player1;
-    }
-    message.innerHTML = playerTurn + ", you're up";
-}
 
 //function to check Win
 function checkWin(){
@@ -73,8 +62,26 @@ function checkWin(){
     if(winStatus){
         restart.classList.remove("disabled", "inactive");
     }else{
-        changeTurn();
+        if(Array.from(boxes).every(box => box.innerHTML !== "")){
+            message.innerHTML = "It's a draw!";
+            restart.classList.remove("disabled", "inactive");
+            document.getElementsByClassName("game-field")[0].classList.add("disabled");
+        }else{
+            changeTurn();
+        }
     }
+}
+
+//function to change the Turn
+function changeTurn(){
+    if(turn == "X" && playerTurn == player1){
+        turn = "O";
+        playerTurn = player2;
+    }else{
+        turn = "X";
+        playerTurn = player1;
+    }
+    message.innerHTML = playerTurn + ", you're up";
 }
 
 //function to reload
